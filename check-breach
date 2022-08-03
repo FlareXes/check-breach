@@ -1,0 +1,35 @@
+#!/bin/sh
+
+FAIL='\033[1;31m'
+ENDC='\033[0m'
+OKGREEN='\033[1;32m'
+OKCYAN='\033[1;36m'
+WARNING='\033[1;33m'
+
+PASSWORD_HASH=$(echo -n "$@" | sha1sum  | awk '{print $1}')
+PASSWORD_HASH=$(echo ${PASSWORD_HASH^^})
+PREFIX="${PASSWORD_HASH:0:5}" 
+SUFFIX="${PASSWORD_HASH:5}" 
+
+HASH_SUFFIXS=$(curl -s https://api.pwnedpasswords.com/range/$PREFIX)
+
+function have_i_been_pwned {
+	local FLAG=0
+	for HASH_AND_COUNT in $HASH_SUFFIXS;
+	do
+		HASH=$(echo $HASH_AND_COUNT | cut -d':' -f 1)
+		if [[ $HASH == $SUFFIX ]];
+		then
+			FLAG=1
+			break
+		fi
+	done
+	echo $FLAG
+}
+
+if [ $(have_i_been_pwned) == 1 ];
+then
+	echo -e "${FAIL}Critical: ${WARNING}Password Has Been Breached${ENDC}"
+else
+	echo -e "${OKGREEN}Safe: ${OKCYAN}Password Not Found In Any Data Breach${ENDC}"
+fi
