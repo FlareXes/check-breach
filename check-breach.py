@@ -1,6 +1,6 @@
 #!/bin/python3
 
-from urllib.request import urlopen
+from urllib.request import urlopen, Request
 from hashlib import sha1
 from sys import argv as sysargv
 
@@ -12,8 +12,10 @@ class bcolors:
     ENDC = '\033[0m'
 
 def get_hash_suffixs(hash_prefix):
-    with urlopen(f"https://api.pwnedpasswords.com/range/{hash_prefix}") as breached_hashes:
-        return [items.decode("utf-8").split(":")[0] for items in breached_hashes.read().split()]      # each item format 'hash_suffix:count'
+    request = Request(f"https://api.pwnedpasswords.com/range/{hash_prefix}")
+    request.add_header("Add-Padding", "true")
+    with urlopen(request) as breached_hashes:
+        return [items.decode("utf-8").split(":")[0] for items in breached_hashes.read().split()]
 
 def have_i_been_pwned(password_hash):
     flag = False

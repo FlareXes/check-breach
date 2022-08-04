@@ -11,7 +11,7 @@ PASSWORD_HASH=$(echo ${PASSWORD_HASH^^})
 PREFIX="${PASSWORD_HASH:0:5}" 
 SUFFIX="${PASSWORD_HASH:5}" 
 
-HASH_SUFFIXS=$(curl -s https://api.pwnedpasswords.com/range/$PREFIX)
+HASH_SUFFIXS=$(curl -s -H 'Add-Padding:true' https://api.pwnedpasswords.com/range/$PREFIX)
 
 function have_i_been_pwned {
 	local FLAG=0
