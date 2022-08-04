@@ -1,15 +1,17 @@
 # check-breach
-Checks If Password Ever Been Breached Via HaveIBeenPwned APIv3 Without Sending Original Password. Use Any One Of Them.
+Checks If Password Ever Been Breached Via HaveIBeenPwned APIv3 Without Sending Original Password. Use Any One Of The Above `check-breach` Script.
 
 ## Why This?
-1. It's Easiar Then Web Inferface. CLI Is Always Better.
-2. I Don't Need To Share My Password With [HaveIBeenPwned](https://haveibeenpwned.com/) Site.
-3. It Usage **[K-Anonymity Model](https://en.wikipedia.org/wiki/K-anonymity)** Which Allow Leaked Password Searching Without Disclosing The Real Password.
+1. It's Easiar Then Web Inferface. CLI Is Always Better
+2. I Don't Need To Share My Password With [HaveIBeenPwned](https://haveibeenpwned.com/) Site
+3. It Usage **[K-Anonymity Model](https://en.wikipedia.org/wiki/K-anonymity)** Which Allow Leaked Password Searching Without Disclosing The Real Password
 4. Make You Realize That You Need A Password Manager Right Now!
 
 ## Example
 **With Python**
 ```bash
+wget https://raw.githubusercontent.com/FlareXes/check-breach/main/check-breach.py     # No need to clone the repo
+
 python check-breach.py <YOUR_PASSWORD>
 
 python check-breach.py P@$$Od123
@@ -17,6 +19,8 @@ python check-breach.py P@$$Od123
 
 **With Bash**
 ```bash
+wget https://raw.githubusercontent.com/FlareXes/check-breach/main/check-breach        # Don't need to clone the repo
+
 chmod +x check-breach
 
 ./check-breach P@$$Od123
