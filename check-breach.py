@@ -1,8 +1,9 @@
 #!/bin/python3
 
 from urllib.request import urlopen, Request
-from hashlib import sha1
 from sys import argv as sysargv
+from getpass import getpass
+from hashlib import sha1
 
 class bcolors:
     OKCYAN = '\033[96m'
@@ -30,6 +31,7 @@ def have_i_been_pwned(password_hash):
 
 def main():
     password = " ".join(sysargv[1:])
+    if password == "": password = getpass("Password: ")
     sha1_hash = sha1(password.encode()).hexdigest().upper()
     hash_components = {"prefix": sha1_hash[:5], "suffix": sha1_hash[5:]}
     if have_i_been_pwned(hash_components):

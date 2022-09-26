@@ -26,6 +26,14 @@ chmod +x check-breach
 ./check-breach P@$$Od123
 ```
 
+> **Note:** `check-breach` Now Supports Password Breach Checks Without Echo By Not Pass Any Args. Just Run The Script Without Any Argument Then You'll Be Prompted With An Non Echo Input Field.
+
+**Password Input Without Echo**
+```bash
+python check-breach.py
+Password: ............
+```
+
 # License
 MIT License
 Copyright (c) 2022 FlareXes
